@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~3.3",
+    "modernizr": "~2.6.2",
+    "wowjs": "git@github.com:matthieua/WOW.git",
+    "animatecss": "git@github.com:daneden/animate.css.git",
+    "storejs": "git@github.com:marcuswestin/store.js.git",
+    "hover": "git@github.com:IanLunn/Hover.git",
+    "jasny-bootstrap": "3.1.3",
+    "parsleyjs": "~2.0",
+    "parsleyjs-bootstrap3": "*",
+    "FlexSlider": "https://github.com/woothemes/FlexSlider.git"
+  },
+  "devDependencies": {}
+}

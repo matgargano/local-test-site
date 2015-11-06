@@ -1,0 +1,34 @@
+{
+  "name": "mgargano/test",
+  "description": "wordpress setup for test",
+  "license": "proprietary",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://satis.matgargano.com"
+    },
+    {
+      "type": "composer",
+      "url": "http://wpackagist.org"
+    }
+  ],
+  "require": {
+    "wpackagist-plugin/disable-emojis": "1.5",
+    "johnpbloch/wordpress": "4.3.1",
+    "vlucas/phpdotenv": "^2.1"
+  },
+  "extra": {
+    "wordpress-install-dir": "./web/wp",
+    "installer-paths": {
+      "./web/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "./web/app/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "./web/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
+    }
+  }
+}
