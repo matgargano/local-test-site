@@ -15,10 +15,8 @@ INTERIM_HOLDING_CELL="$HOME/temp/interim-holding-cell"
 INTERIM_PLUGINS_DIR="$INTERIM_HOLDING_CELL/wp-content/plugins"
 INTERIM_THEMES_DIR="$INTERIM_HOLDING_CELL/wp-content/themes"
 
-PANTHEON_REPO="ssh://codeserver.dev.f4e63549-adc4-43f0-bdbf-c5367d853e83@codeserver.dev.f4e63549-adc4-43f0-bdbf-c5367d853e83.drush.in:2222/~/repository.git
+PANTHEON_REPO="ssh://codeserver.dev.f4e63549-adc4-43f0-bdbf-c5367d853e83@codeserver.dev.f4e63549-adc4-43f0-bdbf-c5367d853e83.drush.in:2222/~/repository.git"
 PANTHEON_HOLDING_CELL="$HOME/temp/pantheon-holding-cell"
-
-
 
 # set up a blank slate
 cleanUpDirectories
@@ -63,4 +61,4 @@ git remote add pantheon $PANTHEON_REPO
 git push pantheon master -f
 
 # clean up
-# cleanUpDirectories
+cleanUpDirectories
