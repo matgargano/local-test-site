@@ -33,14 +33,24 @@ git clone $INTERIM_REPO $INTERIM_HOLDING_CELL
 git clone $PANTHEON_REPO $PANTHEON_HOLDING_CELL
 
 
+#add pantheons updates to core
+cd $INTERIM_HOLDING_CELL
+rm -rf *
+cp -R $PANTHEON_HOLDING_CELL/* .
+git commit -am "adding in pantheon repo for $DATE deploy"
+
+# add our canonical plugins and themes
 rm -rf $INTERIM_PLUGINS_DIR $INTERIM_THEMES_DIR
 cp -R $CANONICAL_PLUGINS_DIR $INTERIM_PLUGINS_DIR
 cp -R $CANONICAL_THEMES_DIR $INTERIM_THEMES_DIR
 
 cd $INTERIM_HOLDING_CELL
 git add .
-git commit -am "COMMIT $DATE"
+git commit -am "adding in our plugins and themes for $DATE deploy"
 git push origin head
 git tag -a "$DATE" -m "Tagging for $DATE deploy"
 git push origin head
 git push origin --tags
+git remote add pantheon $PANTHEON_REPO
+git push pantheon master -f
+
