@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "58c05f4f963958052176ed12fec08395",
-    "content-hash": "5a4090c7a3dec05f398f463cc747af87",
+    "hash": "798afbf6e44e338390e6f5e974a6998e",
+    "content-hash": "0eeaab734960a30a3834329f196032ed",
     "packages": [
         {
             "name": "composer/installers",
@@ -243,15 +243,15 @@
         },
         {
             "name": "wpackagist-plugin/disable-emojis",
-            "version": "1.5",
+            "version": "1.0",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/disable-emojis/",
-                "reference": "tags/1.5"
+                "reference": "tags/1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/disable-emojis.1.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/disable-emojis.1.0.zip",
                 "reference": null,
                 "shasum": null
             },
