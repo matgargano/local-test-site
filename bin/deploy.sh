@@ -4,19 +4,18 @@
 
 DATE=`date +%Y%m%d%H%M%S`
 CANONICAL_REPO="git@github.com:matgargano/local-test-site.git"
-CANONICAL_HOLDING_CELL="/Users/morgandeveloper/temp/canonical-holding-cell"
+CANONICAL_HOLDING_CELL="$HOME/temp/canonical-holding-cell"
 CANONICAL_PLUGINS_DIR="$CANONICAL_HOLDING_CELL/web/app/plugins"
 CANONICAL_THEMES_DIR="$CANONICAL_HOLDING_CELL/web/app/themes"
 
 INTERIM_REPO="git@github.com:matgargano/interim-pantheon-wp.git"
-INTERIM_HOLDING_CELL="/Users/morgandeveloper/temp/interim-holding-cell"
+INTERIM_HOLDING_CELL="$HOME/temp/interim-holding-cell"
 INTERIM_PLUGINS_DIR="$INTERIM_HOLDING_CELL/wp-content/plugins"
 INTERIM_THEMES_DIR="$INTERIM_HOLDING_CELL/wp-content/themes"
 
-PANTHEON_REPO="ssh://codeserver.dev.d68a4e73-f922-4258-94ff-84749fee08f1@codeserver.dev.d68a4e73-f922-4258-94ff-84749fee08f1.drush.in:2222/~/repository.git"
-PANTHEON_HOLDING_CELL="/Users/morgandeveloper/temp/pantheon-holding-cell"
-PANTHEON_PLUGINS_DIR="$PANTHEON_HOLDING_CELL/wp-content/plugins"
-PANTHEON_THEMES_DIR="$PANTHEON_HOLDING_CELL/wp-content/themes"
+PANTHEON_REPO="git clone ssh://codeserver.dev.f4e63549-adc4-43f0-bdbf-c5367d853e83@codeserver.dev.f4e63549-adc4-43f0-bdbf-c5367d853e83.drush.in:2222/~/repository.git"
+PANTHEON_HOLDING_CELL="$HOME/temp/pantheon-holding-cell"
+
 
 
 
@@ -53,4 +52,3 @@ git push origin head
 git push origin --tags
 git remote add pantheon $PANTHEON_REPO
 git push pantheon master -f
-
