@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "72ee66e9b8983a7d4ea5303962a63685",
-    "content-hash": "9ca8d7224487dfb89814f87d8fb5ba12",
+    "hash": "4baaed956b4043b59a6277f33c246423",
+    "content-hash": "10abd64187dccfe80894fec09179beac",
     "packages": [
         {
             "name": "composer/installers",
@@ -280,6 +280,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/disable-emojis/"
+        },
+        {
+            "name": "wpackagist-plugin/mat-garganos-baseball-standings",
+            "version": "2.0.0",
+            "source": {
+                "type": "svn",
+                "url": "http://plugins.svn.wordpress.org/mat-garganos-baseball-standings/",
+                "reference": "tags/2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/mat-garganos-baseball-standings.2.0.0.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/mat-garganos-baseball-standings/"
         },
         {
             "name": "wpackagist-plugin/wordfence",

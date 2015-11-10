@@ -17,7 +17,8 @@
     "johnpbloch/wordpress": "4.3.1",
     "vlucas/phpdotenv": "^2.1",
     "wpackagist-plugin/wordfence": "^6.0",
-    "wpackagist-plugin/akismet": "^3.1"
+    "wpackagist-plugin/akismet": "^3.1",
+    "wpackagist-plugin/mat-garganos-baseball-standings": "^2.0"
   },
   "extra": {
     "wordpress-install-dir": "./web/wp",
