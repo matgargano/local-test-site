@@ -80,24 +80,6 @@ $config = array(
 
 
             )
-        ),
-        array(
-            'retrieve' => array(
-                'type' => 'git',
-                'repo' => 'git@github.com:matgargano/aa.git',
-            ),
-            'keep' => array(
-
-                array(
-                    'pathMap' => array('.' => '.'),
-                    'recursive' => false
-                ),
-                array(
-                    'pathMap' => array('wp-includes' => 'wp-includes'),
-                )
-
-
-            )
         )
 
     ),
