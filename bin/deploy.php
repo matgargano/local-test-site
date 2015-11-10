@@ -1,7 +1,11 @@
 #!/usr/local/bin/php
 <?php
-$defaults = array(
-    'tempBase' => $_SERVER['HOME'] . '/temp',
+
+use WPize\WPize;
+
+
+$config = array(
+    'tempBase' => null,
     'pieces' => array(
         array(
             'retrieve' => array(
@@ -13,14 +17,22 @@ $defaults = array(
                     'cp -R wordpress/* .',
                     'rm -rf wordpress',
                     'rm -rf latest.tar.gz',
-                    'cp wp-config-sample.php wp-config.php'
+                    'rm wp-config-sample.php'
                 )
 
             ),
             'keep' => array(
-                './' => './',
-                'wp-includes' => 'wp-includes',
-                'wp-admin' => 'wp-admin'
+                array(
+                    'pathMap' => array('.' => '.'),
+                    'recursive' => false
+                ),
+                array(
+                    'pathMap' => array('wp-includes' => 'wp-admin')
+                ),
+                array(
+                    'pathMap' => array('wp-admin' => 'wp-admin')
+                ),
+
             )
         ),
         array(
@@ -32,21 +44,59 @@ $defaults = array(
                 'composer install'
             ),
             'keep' => array(
-                'web/app/plugins' => 'wp-content/plugins',
-                'web/app/themes' => 'wp-content/themes',
+
+                array(
+                    'pathMap' => array('web/app/plugins' => 'wp-content/plugins'),
+
+                ),
+                array(
+                    'pathMap' => array('web/app/themes' => 'wp-content/themes'),
+
+                ),
 
             )
         ),
+
         array(
             'retrieve' => array(
                 'type' => 'git',
                 'repo' => 'ssh://codeserver.dev.7b33070f-d376-4663-807d-d5283bae2d06@codeserver.dev.7b33070f-d376-4663-807d-d5283bae2d06.drush.in:2222/~/repository.git',
             ),
             'keep' => array(
-                'wp-content/mu-plugins' => 'wp-content/mu-plugins',
-                './' => './',
-                'wp-includes' => 'wp-includes',
-                'wp-admin' => 'wp-admin'
+
+                array(
+                    'pathMap' => array('.' => '.'),
+                    'recursive' => false
+                ),
+                array(
+                    'pathMap' => array('wp-includes' => 'wp-includes')
+                ),
+                array(
+                    'pathMap' => array('wp-admin' => 'wp-admin')
+                ),
+                array(
+                    'pathMap' => array('wp-content/mu-plugins' => 'wp-content/mu-plugins')
+                ),
+
+
+            )
+        ),
+        array(
+            'retrieve' => array(
+                'type' => 'git',
+                'repo' => 'git@github.com:matgargano/aa.git',
+            ),
+            'keep' => array(
+
+                array(
+                    'pathMap' => array('.' => '.'),
+                    'recursive' => false
+                ),
+                array(
+                    'pathMap' => array('wp-includes' => 'wp-includes'),
+                )
+
+
             )
         )
 
@@ -62,150 +112,49 @@ $defaults = array(
 );
 
 
-// todo allow passing custom config
-$config = $defaults;
 
 
-function removeDirectoryIfExists($dir)
+
+//
+//class git extends handlers
+//{
+//
+//    public function __construct($data, $base = null)
+//    {
+//        parent::__construct($data, $base);
+//    }
+//
+//    public function grab()
+//    {
+//        $repo = $this->data['retrieve']['repo'];
+//        shell_exec('git clone ' . $repo . ' .');
+//        chdir($this->dir);
+//        if (is_array($this->data['postCmd'])) {
+//            foreach ($this->data['postCmd'] as $command) {
+//                shell_exec($command);
+//            }
+//        }
+//
+//
+//    }
+//
+//}
+
+
+
+$wpizer = new WPize($config);
+$wpizer->process();
+
+
+function tempdir()
 {
-    if (is_dir($dir)) {
-        rrmdir($dir);
+    $tempfile = tempnam(sys_get_temp_dir(), '');
+    if (file_exists($tempfile)) {
+        unlink($tempfile);
     }
-}
-
-
-function rrmdir($dir)
-{
-    if (is_dir($dir)) {
-        $objects = scandir($dir);
-        foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
-                if (filetype($dir . "/" . $object) == "dir") rrmdir($dir . "/" . $object); else unlink($dir . "/" . $object);
-            }
-        }
-        reset($objects);
-        rmdir($dir);
+    mkdir($tempfile);
+    if (is_dir($tempfile)) {
+        return $tempfile;
     }
-}
-function recurse_copy($src,$dst) {
-    $dir = opendir($src);
-    @mkdir($dst);
-    while(false !== ( $file = readdir($dir)) ) {
-        if (( $file != '.' ) && ( $file != '..' )) {
-            if ( is_dir($src . '/' . $file) ) {
-                recurse_copy($src . '/' . $file,$dst . '/' . $file);
-            }
-            else {
-                copy($src . '/' . $file,$dst . '/' . $file);
-            }
-        }
-    }
-    closedir($dir);
-}
-
-function removeDirectories($dir)
-{
-
-    removeDirectoryIfExists($dir . '/wpizer');
-
-}
-
-removeDirectories($config['tempBase']);
-
-mkdir($config['tempBase'] . '/wpizer/final', 0777, true);
-
-
-foreach ($config['pieces'] as $piece) {
-
-    $type = 'shell';
-    if (isset($piece['retrieve']['type'])) {
-        $type = $piece['retrieve']['type'];
-    }
-
-
-    if (class_exists($type)) {
-        $handle = new $type($piece, $config['tempBase']);
-        $handle->handle();
-    }
-
-
-}
-
-abstract class handlers
-{
-    protected $data;
-    protected $base;
-    protected $hash;
-
-    public function __construct($data, $base = null)
-    {
-        $this->data = $data;
-        $this->base = $base;
-        $this->hash = md5(microtime(true));
-
-        if (!$this->base) {
-            $this->base = $_SERVER['HOME'];
-        }
-    }
-
-    abstract public function handle();
-
-
-}
-
-class git extends handlers
-{
-
-    public function __construct($data, $base = null)
-    {
-        parent::__construct($data, $base);
-    }
-
-    public function handle()
-    {
-        $repo = $this->data['retrieve']['repo'];
-        $dir = $this->base . '/wpizer/' . $this->hash;
-        mkdir($dir, 0777, true);
-        chdir($dir);
-        shell_exec('git clone ' . $repo . ' .');
-        chdir($dir);
-        if ( is_array($this->data['postCmd'])) {
-            foreach($this->data['postCmd'] as $command ) {
-                shell_exec($command);
-            }
-        }
-
-
-
-        if (is_array($this->data['keep'])) {
-            foreach ($this->data['keep'] as $source => $destination) {
-
-                $actualSource = $dir . '/' . $source;
-                $actualDestination = $this->base . '/wpizer/final/' . $destination;
-                mkdir($actualDestination, 0777, true);
-                recurse_copy($actualSource, $actualDestination);
-
-
-
-
-            }
-        }
-
-    }
-
-}
-
-class shell extends handlers
-{
-    public function __construct($data, $base = null)
-    {
-        parent::__construct($data, $base);
-    }
-
-    public function handle()
-    {
-
-    }
-
 }
 
