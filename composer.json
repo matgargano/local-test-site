@@ -16,7 +16,8 @@
     "wpackagist-plugin/disable-emojis": "~1.5.0",
     "johnpbloch/wordpress": "4.3.1",
     "vlucas/phpdotenv": "^2.1",
-    "wpackagist-plugin/wordfence": "^6.0"
+    "wpackagist-plugin/wordfence": "^6.0",
+    "wpackagist-plugin/akismet": "^3.1"
   },
   "extra": {
     "wordpress-install-dir": "./web/wp",

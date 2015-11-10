@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c180106b397390b114d197f685879463",
-    "content-hash": "3352f950b027390b4695b2d1bf0c27c2",
+    "hash": "72ee66e9b8983a7d4ea5303962a63685",
+    "content-hash": "9ca8d7224487dfb89814f87d8fb5ba12",
     "packages": [
         {
             "name": "composer/installers",
@@ -240,6 +240,26 @@
                 "environment"
             ],
             "time": "2015-10-28 18:53:35"
+        },
+        {
+            "name": "wpackagist-plugin/akismet",
+            "version": "3.1.5",
+            "source": {
+                "type": "svn",
+                "url": "http://plugins.svn.wordpress.org/akismet/",
+                "reference": "tags/3.1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.5.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/akismet/"
         },
         {
             "name": "wpackagist-plugin/disable-emojis",
